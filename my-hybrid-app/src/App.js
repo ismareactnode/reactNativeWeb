@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
+import Header from './components/Header';
+import AlbumsList from './components/AlbumsList';
 
 export default class NativeApp extends Component {
+
+  componentWillMount(){
+
+      try{
+        let albums = fetch('http://rallycoding.herokuapp.com/api/music_albums');
+        albums = albums.json();
+        console.log(albums);
+      } catch(e){
+      }
+  }
+
   render() {
     return(
       <View style={styles.app}>
-        <View style={styles.appHeader}>
-          <Text style={styles.appTitle}>REACT NATIVE WEB</Text>
-        </View>
-        <Text style={styles.appIntro}>qsdkjfh lqsfkjh qksjdhfl jdqskhf kjqsdhf kljqsdhf kjdqshf</Text>
+        <Header title='Albums'/>
+        <AlbumsList />
       </View>
     );
   }
@@ -18,23 +29,6 @@ const styles = {
   app:{
     flex: 1,
   },
-  appHeader: {
-        flex: 1,
-    backgroundColor: '#222',
-    height: '20vh',
-  padding: 20,
-  justifyContent: 'center',
-  alignItems: 'center'
-  },
-  appTitle: {
-    fontSize: '1.7em',
-    color: 'white'
-  },
-  appIntro: {
-    flex: 2,
-    fontSize: 30,
-    textAlign: 'center',
-  }
 }
 //       <View>
 //         <View style={styles.appHeader}>
