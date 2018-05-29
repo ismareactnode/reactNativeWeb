@@ -2,7 +2,7 @@ import React ,{ Component } from 'react';
 import { View, Text } from 'react-native';
 import axios from 'axios';
 
-import AlbumItem from './AlbumItem';
+import AlbumDetail from './AlbumDetail';
 
 class AlbumsList extends Component{
 
@@ -21,10 +21,15 @@ class AlbumsList extends Component{
    })
    .catch((e)=>console.log('error : ', e));
  }
+
+ renderAlbums(){
+     return Object.values(this.state.albums).map(album=><AlbumDetail key={album.title} album={album}/>);
+ }
+
   render(){
     return(
       <View>
-      {Object.values(this.state.albums).map(album=><AlbumItem key={album.title} album={album}/>)}
+        {this.renderAlbums()}
       </View>
     );
   };
